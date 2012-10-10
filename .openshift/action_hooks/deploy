@@ -10,6 +10,11 @@ then
     virtualenv --no-site-packages ${OPENSHIFT_DATA_DIR}/virtenv
 fi
 
+echo -e "#\041/bin/sh\n/usr/bin/ssh -o \"UserKnownHostsFile=$OPENSHIFT_DATA_DIR/known_hosts\" \"\$@\"" > ${OPENSHIFT_DATA_DIR}/ssh_wrapper
+chmod +x ${OPENSHIFT_DATA_DIR}/ssh_wrapper
+
+export GIT_SSH=$OPENSHIFT_DATA_DIR/ssh_wrapper  
+
 if [ ! -f ${OPENSHIFT_REPO_DIR}/bin/buildout ]
 then
     pushd ${OPENSHIFT_REPO_DIR}
