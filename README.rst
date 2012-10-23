@@ -74,4 +74,3 @@ Take note the IP and port number there and access
 http://$internalipaddress:8080. You should be able to access the Zope root 
 there. Take care not to add ``$internalipaddress`` into the virtual 
 hosting settings.
-
