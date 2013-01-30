@@ -4,6 +4,8 @@ import subprocess, os, sys
 from zest.releaser.vcs import BaseVersionControl
 from zest.releaser import utils
 import shutil
+from ConfigParser import ConfigParser
+from StringIO import StringIO
 
 autorelease = '''${auto-release}'''
 releaser = 'fullrelease'
@@ -16,22 +18,39 @@ sourcesdir = '${buildout:sources-dir}'
 versions = {}
 for package in packages:
     os.chdir('%s/%s/%s' % (directory, sourcesdir, package))
-    versions[package] = BaseVersionControl()._extract_version()
+    p = subprocess.Popen(['git','log','-1'], stdout=subprocess.PIPE)
+    retval = p.wait()
+    out = p.stdout.read()
+    if 'Back to development:' in out:
+        print "Skipping %s" % package
+        continue
+
+    print "Releasing %s" % package
     os.system('git log | head -n 50')
     releaseme = raw_input('Release %s? (y/N/abort)' % package)
     if releaseme.lower().strip() == 'y':
+        versions[package] = BaseVersionControl()._extract_version()
         os.system(releaser)
     elif releaseme.lower().strip()[0] == 'a':
         sys.exit(1)
 
-stream = '[versions]'
-for i, v in versions.items():
-    ver = "%s=%s" % (i, utils.cleanup_version(v))
-    stream+='\n%s' % ver
-
 versionfile = '${buildout:directory}/releaseversions.cfg'
 oldversionfile = '${buildout:directory}/releaseversions.cfg.old'
+
+config = ConfigParser()
 if os.path.exists(versionfile):
+    config.readfp(open(versionfile))
     shutil.move(versionfile, oldversionfile)
-open(versionfile, 'w').write(stream)
-print stream
+
+if not config.has_section('version'):
+    config.add_section('version')
+
+for key, version in versions.items():
+    config.set('version', key, version)
+
+stream = StringIO()
+config.write(stream)
+
+result = stream.getvalue()
+open(versionfile, 'w').write(result)
+print result
