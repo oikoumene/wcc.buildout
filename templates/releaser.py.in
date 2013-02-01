@@ -33,7 +33,7 @@ for package in packages:
             BaseVersionControl()._extract_version()
         )
         os.system(releaser)
-    elif releaseme.lower().strip()[0] == 'a':
+    elif releaseme.lower().strip().startswith('a'):
         sys.exit(1)
 
 versionfile = '${buildout:directory}/releaseversions.cfg'
