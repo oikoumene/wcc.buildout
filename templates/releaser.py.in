@@ -23,6 +23,15 @@ for package in packages:
     out = p.stdout.read()
     if 'Back to development:' in out:
         print "Skipping %s" % package
+        p = subprocess.Popen(['git','log','-2','--skip=1'], stdout=subprocess.PIPE)
+        retval = p.wait()
+        out = p.stdout.read()
+        match = None
+        for line in out.split('\n'):
+            match = re.match('.*Preparing release (.*?)$', line)
+            if match:
+                versions[package] = match.group(1)
+                break;
         continue
 
     print "Releasing %s" % package
