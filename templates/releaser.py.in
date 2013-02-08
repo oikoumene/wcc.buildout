@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import subprocess, os, sys
+import subprocess, os, sys, re
 from zest.releaser.vcs import BaseVersionControl
 from zest.releaser import utils
 import shutil
