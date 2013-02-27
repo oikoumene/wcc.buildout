@@ -150,5 +150,5 @@ basedir = '${buildout:directory}'
 #releaser = BaseReleaser('/tank/inigo/wcc/buildout', config)
 config.optionxform = str
 config.readfp(open(os.path.join(basedir, 'buildout.cfg')))
-releaser = BaseReleaser(basedir, config, release_only=auto_release)
+releaser = BaseReleaser(basedir, config, packages=auto_release)
 releaser.release_all()
