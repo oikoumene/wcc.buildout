@@ -20,6 +20,7 @@ class BaseStatusChecker(object):
         available_tags = vcs.available_tags()
         if not available_tags:
             self._lag_log = ''
+            return
         logcmd = vcs.cmd_log_since_tag(available_tags[-1])
         p = subprocess.Popen(logcmd.split(), stdout=subprocess.PIPE)
         retval = p.wait()
