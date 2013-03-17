@@ -9,6 +9,30 @@ import shutil
 from ConfigParser import ConfigParser
 from StringIO import StringIO
 
+def get_available_tags(vcs):
+    tags = [i.split('.') for i in vcs.available_tags()]
+    intags = []
+    for t in tags:
+        val = []
+        for sub in t:
+            try:
+                sub = int(sub)
+            except:
+                pass
+            val.append(sub)
+        intags.append(val)
+    tags = sorted(intags)
+
+    result = []
+    for t in tags:
+        val = []
+        for sub in t:
+            val.append(str(sub))
+        result.append(val)
+
+    return ['.'.join(i) for i in result]
+
+
 class BaseStatusChecker(object):
 
     def __init__(self, vcs):
@@ -17,7 +41,7 @@ class BaseStatusChecker(object):
 
     def _update_log(self):
         vcs = self.vcs
-        available_tags = vcs.available_tags()
+        available_tags = get_available_tags(vcs)
         if not available_tags:
             self._lag_log = ''
             return
@@ -29,7 +53,7 @@ class BaseStatusChecker(object):
 
     def need_release(self):
         vcs = self.vcs
-        available_tags = vcs.available_tags()
+        available_tags = get_available_tags(vcs)
         if not available_tags:
             return True
 
@@ -92,7 +116,7 @@ class BaseReleaser(object):
         for packagename in self.packages:
             os.chdir(os.path.join(self.sourcesdir, packagename))
             vcs = version_control()
-            available_tags = vcs.available_tags()
+            available_tags = get_available_tags(vcs)
             if not available_tags:
                 continue
             self.versions[packagename] = available_tags[-1]
