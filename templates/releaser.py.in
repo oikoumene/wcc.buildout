@@ -10,27 +10,18 @@ from ConfigParser import ConfigParser
 from StringIO import StringIO
 
 def get_available_tags(vcs):
-    tags = [i.split('.') for i in vcs.available_tags()]
-    intags = []
-    for t in tags:
-        val = []
-        for sub in t:
+
+    def sortkey(x):
+        result = []
+        for k in x.split('.'):
             try:
-                sub = int(sub)
+                k = int(k)
             except:
                 pass
-            val.append(sub)
-        intags.append(val)
-    tags = sorted(intags)
+            result.append(k)
+        return result
 
-    result = []
-    for t in tags:
-        val = []
-        for sub in t:
-            val.append(str(sub))
-        result.append(val)
-
-    return ['.'.join(i) for i in result]
+    return sorted(vcs.available_tags(), key=sortkey)
 
 
 class BaseStatusChecker(object):
