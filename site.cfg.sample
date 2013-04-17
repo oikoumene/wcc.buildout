@@ -1,0 +1,11 @@
+[site]
+instance-address = 127.0.0.1:8091
+instance2-address = 127.0.0.1:8092
+instance3-address = 127.0.0.1:8093
+instance4-address = 127.0.0.1:8094
+instancedbg-address = 127.0.0.1:8099
+
+zeoserver-address = 127.0.0.1:8100
+
+[secrets]
+user = user:secret
