@@ -1,10 +1,21 @@
 [site]
-instance-address = 127.0.0.1:8091
-instance2-address = 127.0.0.1:8092
-instance3-address = 127.0.0.1:8093
-instance4-address = 127.0.0.1:8094
-instancedbg-address = 127.0.0.1:8099
+instance-ip = 127.0.0.1
+instance-port = 8091
+instance-address = ${site:instance-ip}:${site:instance-port}
 
+instance2-ip = 127.0.0.1
+instance2-port = 8092
+instance2-address = ${site:instance2-ip}:${site:instance2-port}
+
+instance3-ip = 127.0.0.1
+instance3-port = 8093
+instance3-address = ${site:instance3-ip}:${site:instance3-port}
+
+instance4-ip = 127.0.0.1
+instance4-port = 8094
+instance4-address = ${site:instance4-ip}:${site:instance4-port}
+
+instancedbg-address = 127.0.0.1:8099
 zeoserver-address = 127.0.0.1:8100
 
 [secrets]
