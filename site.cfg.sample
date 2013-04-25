@@ -20,3 +20,4 @@ zeoserver-address = 127.0.0.1:8100
 
 [secrets]
 user = user:secret
+munin-secret = secrethash
