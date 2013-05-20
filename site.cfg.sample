@@ -1,4 +1,6 @@
 [site]
+effective-user = 
+
 instance-ip = 127.0.0.1
 instance-port = 8091
 instance-address = ${site:instance-ip}:${site:instance-port}
