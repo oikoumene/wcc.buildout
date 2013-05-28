@@ -24,3 +24,5 @@ zeoserver-address = 127.0.0.1:8100
 user = user:secret
 munin-secret = secrethash
 jsonapi-secret = secret
+clockserver-user = clockserver
+clockserver-password = clockserver
