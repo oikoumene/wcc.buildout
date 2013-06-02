@@ -20,6 +20,8 @@ instance4-address = ${site:instance4-ip}:${site:instance4-port}
 instancedbg-address = 127.0.0.1:8099
 zeoserver-address = 127.0.0.1:8100
 
+service-zcml-conf = 
+
 [secrets]
 user = user:secret
 munin-secret = secrethash
