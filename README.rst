@@ -7,4 +7,4 @@ centos/fedora
     yum install geos
 
 ubuntu/debian 
-    apt-get install libgeos
+    apt-get install libgeos libgeos-dev
