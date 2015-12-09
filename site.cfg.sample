@@ -28,3 +28,8 @@ munin-secret = secrethash
 jsonapi-secret = secret
 clockserver-user = clockserver
 clockserver-password = clockserver
+
+#collective.recipe.backup
+backup_location = var/backups
+blobbackuplocation = var/blobstoragebackups
+
