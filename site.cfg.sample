@@ -22,6 +22,10 @@ zeoserver-address = 127.0.0.1:8100
 
 service-zcml-conf = 
 
+#collective.recipe.backup
+backup_location = var/backups
+blobbackuplocation = var/blobstoragebackups
+
 [secrets]
 user = user:secret
 munin-secret = secrethash
@@ -29,7 +33,4 @@ jsonapi-secret = secret
 clockserver-user = clockserver
 clockserver-password = clockserver
 
-#collective.recipe.backup
-backup_location = var/backups
-blobbackuplocation = var/blobstoragebackups
 
