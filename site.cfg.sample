@@ -20,7 +20,9 @@ instance4-address = ${site:instance4-ip}:${site:instance4-port}
 instancedbg-address = 127.0.0.1:8099
 zeoserver-address = 127.0.0.1:8100
 
-trusted-proxy-ip = 127.0.0.1
+trusted-proxy-ip1 = 127.0.0.1
+trusted-proxy-ip2 = 127.0.0.1
+trusted-proxy-ip3 = 127.0.0.1
 
 service-zcml-conf = 
 
